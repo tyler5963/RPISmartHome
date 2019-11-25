@@ -1,19 +1,22 @@
 '''****************************************************************************
 * File Name: configs.py                                                       *
 * Purpose:   Global variables and configurations for RPI Smart Home.          *
-* Date:      11/24/2019                                                       *
+* Date:      11/25/2019                                                       *
 * Copyright © 2019 Darren Cicala and Tyler Skene. All rights reserved.        *
 ****************************************************************************'''
 
+# Note: none of the values in this file are meant to be used as variables.
+# they can be equated to #define macros in C/C++.
+
 # document version
-__version__ = "0.2.0"
+__version__ = "0.3.0"
 
 # there should be no imports in this file!
 
-# global switches
+########################## Global Switches #############################
 SW_USE_METRIC_UNITS = False
 
-# error codes
+############################ Error Codes ###############################
 SYSERROR_NO_ERROR                    = 0
 SYSERROR_TEMP_OUTDOOR_SENSOR_FAILURE = 1
 SYSERROR_TEMP_INDOOR_SENSOR_FAILRUE  = 2
@@ -21,27 +24,66 @@ SYSERROR_WL_MOISTURE_SENSOR_FAILURE  = 3
 SYSERROR_WL_API_CALL_FAILURE         = 4
 SYSERROR_GUI_GENERAL_FAILURE         = 5
 
-# API information
+########################### API information ############################
+
 s_ApiBase            = "https://api.darksky.net/forecast/"     # root API 
 s_ApiKey             = "" # modify this with your own darksky key
 s_GPSLocation_LatLon = "" # modify this with your own GPS coordinates, e.g. "37.5148,15.7891"
 s_FullAPI = s_ApiBase + s_ApiKey +  "/" + s_GPSLocation_LatLon # full API path
 
-# temperature sensor information
+##################### Temperature sensor information ###################
+
 i_IndoorSensorPin  = 17   # modify this with your own sensor signal pin for the outside
-i_OutdoorSensorPin = 16   # modify this with your own sensor signal pin for indoors
+i_OutdoorSensorPin = 26   # modify this with your own sensor signal pin for indoors
 
-i_DoNothingFlag    = 0
-i_HeatFlag         = 1
-i_CoolFlag         = 2
+i_DoNothingFlag  = 0  # flag state indicating system will not heat or cool
+i_HeatFlag       = 1  # flag state indicating system will heat 
+i_CoolFlag       = 2  # flag state indicating system will cool
 
-# moisture sensor information
+i_HvacOff = 0
+i_HvacOn  = 1
+
+f_HeatThreshold  = 65 # temperature (in F) that the system will switch to heating
+f_CoolThreshold  = 75 # temperature (in F) that the system will switch to cooling
+
+f_HeatSetting        = 68 # temp to se
+f_CoolSetting        = 75
+f_TemperatureSetback = 2
+f_ComfortZoneRange   = 5
+
+if SW_USE_METRIC_UNITS:
+	f_HeatThreshold = ((5/9) * f_HeatThreshold) - 32
+    f_CoolThreshold = ((5/9) * f_CoolThreshold) - 32
+    f_HeatSetting   = ((5/9) * f_HeatSetting) - 32
+    
+    f_TemperatureSetback = 1.11 
+    f_ComfortZoneRange   = 2.75
+    f_CoolSettingLowHum  = ((5/9) * f_CoolSettingLowHum) - 32
+    f_CoolSettingHighHum = ((5/9) * f_CoolSettingHighHum) - 32
+    
+f_HumThreshold_Pct = 50
+
+####################### Moisture Sensor Configs ########################
+
 # note: to enable SPI for you:
 # 1. run sudo raspi-config
 # 2. go to interfacing options
 # 3. go to SPI, press enter to enable
-# check to see if /dev/spidev0.0 exists 
+# 4. check to see if /dev/spidev0.0 exists 
 i_SPIDevice = 0
 i_SPIPort   = 0
 
+########################## Timing Configs ##############################
+# note: all times considered to be in military time
+i_NighttimeHour = 21  # when does night start?
+i_MorningHour   = 9   # when does the day start?
+
+i_SummertimeFlag = 0  # the current state of the system is summertime
+i_WintertimeFlag = 1  # the current state of the system is wintertime
+
+i_DaytimeFlag = 0  # the current state of the system is day
+i_NightFlag   = 1  # the current state of the system is night
+
+i_StartSummerMonth = 4  # summer starts in May
+i_EndSummerMonth   = 10 # summer ends in October
 ################################## end file ###################################
