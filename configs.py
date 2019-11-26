@@ -1,15 +1,19 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 '''****************************************************************************
 * File Name: configs.py                                                       *
 * Purpose:   Global variables and configurations for RPI Smart Home.          *
-* Date:      11/25/2019                                                       *
+* Date:      11/26/2019                                                       *
 * Copyright © 2019 Darren Cicala and Tyler Skene. All rights reserved.        *
+* Powered by the DarkSky API.                                                 *
 ****************************************************************************'''
 
 # Note: none of the values in this file are meant to be used as variables.
 # they can be equated to #define macros in C/C++.
 
 # document version
-__version__ = "0.3.0"
+__version__ = "0.4.0"
 
 # there should be no imports in this file!
 
@@ -52,14 +56,14 @@ f_TemperatureSetback = 2
 f_ComfortZoneRange   = 5
 
 if SW_USE_METRIC_UNITS:
-	f_HeatThreshold = ((5/9) * f_HeatThreshold) - 32
-    f_CoolThreshold = ((5/9) * f_CoolThreshold) - 32
-    f_HeatSetting   = ((5/9) * f_HeatSetting) - 32
+  f_HeatThreshold = ((5/9) * f_HeatThreshold) - 32
+  f_CoolThreshold = ((5/9) * f_CoolThreshold) - 32
+  f_HeatSetting   = ((5/9) * f_HeatSetting) - 32
     
-    f_TemperatureSetback = 1.11 
-    f_ComfortZoneRange   = 2.75
-    f_CoolSettingLowHum  = ((5/9) * f_CoolSettingLowHum) - 32
-    f_CoolSettingHighHum = ((5/9) * f_CoolSettingHighHum) - 32
+  f_TemperatureSetback = 1.11 
+  f_ComfortZoneRange   = 2.75
+  f_CoolSettingLowHum  = ((5/9) * f_CoolSettingLowHum) - 32
+  f_CoolSettingHighHum = ((5/9) * f_CoolSettingHighHum) - 32
     
 f_HumThreshold_Pct = 50
 
