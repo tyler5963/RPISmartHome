@@ -1,0 +1,5 @@
+Temp module:
+- sensor read (done)
+- initialization (done)
+- decision to heat or cool -> outside temp
+- decision to kick on the system (i.e. on or off) -> comfort range
