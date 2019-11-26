@@ -24,4 +24,4 @@ Hardware Bill of Materials:
 - (1) HDMI Monitor, or VGA monitor w/ HDMI dongle
 - Wires and/or breadboard
 
-Current features include: thermostat functionality and lawn watering regulation.
+Current features include: GUI rendering of forecasts, thermostat functionality, and lawn watering regulation.
