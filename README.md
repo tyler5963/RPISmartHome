@@ -16,11 +16,12 @@ Software libraries used:
 
 Hardware Bill of Materials:
 - (1) Raspberry Pi Model 3B 
+- (1) Raspberry Pi Power Supply (5.0V, 2.5A rating)
 - (1) 32 GB SD Card flashed with Raspbian
 - (2) DHT11 temperature and moisture sensors
 - (1) VMA303 water level and moisture sensor
 - (1) MCP3008 Analog to Digital Converter (ADC)
-- (1) Monitor
+- (1) HDMI Monitor, or VGA monitor w/ HDMI dongle
 - Wires and/or breadboard
 
 Current features include: thermostat functionality and lawn watering regulation.
