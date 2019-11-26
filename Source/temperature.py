@@ -10,7 +10,7 @@
 ****************************************************************************'''
 
 # document version
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 
 # imports
 import configs      # global configs file
@@ -48,7 +48,7 @@ class TemperatureSensor:
 		
 		# get new values 
 		self.f_Humidity_Pct, self.f_Temperature_C = Adafruit_DHT.read_retry(self.i_SensorType, self.i_GPIOPin)
-		self.f_Temperature_F = ((9/5) * self.f_Temperature_C) + 32
+		self.f_Temperature_F = (1.8 * self.f_Temperature_C) + 32
 
 # class members 
 class TemperatureModule:

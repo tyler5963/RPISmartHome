@@ -13,7 +13,7 @@
 # they can be equated to #define macros in C/C++.
 
 # document version
-__version__ = "0.4.0"
+__version__ = "0.4.1"
 
 # there should be no imports in this file!
 
@@ -56,14 +56,14 @@ f_TemperatureSetback = 2
 f_ComfortZoneRange   = 5
 
 if SW_USE_METRIC_UNITS:
-  f_HeatThreshold = ((5/9) * f_HeatThreshold) - 32
-  f_CoolThreshold = ((5/9) * f_CoolThreshold) - 32
-  f_HeatSetting   = ((5/9) * f_HeatSetting) - 32
+  f_HeatThreshold = (0.55556 * f_HeatThreshold) - 32
+  f_CoolThreshold = (0.55556 * f_CoolThreshold) - 32
+  f_HeatSetting   = (0.55556 * f_HeatSetting) - 32
     
   f_TemperatureSetback = 1.11 
   f_ComfortZoneRange   = 2.75
-  f_CoolSettingLowHum  = ((5/9) * f_CoolSettingLowHum) - 32
-  f_CoolSettingHighHum = ((5/9) * f_CoolSettingHighHum) - 32
+  f_CoolSettingLowHum  = (0.55556 * f_CoolSettingLowHum) - 32
+  f_CoolSettingHighHum = (0.55556 * f_CoolSettingHighHum) - 32
     
 f_HumThreshold_Pct = 50
 
