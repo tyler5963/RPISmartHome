@@ -53,24 +53,10 @@ class TemperatureSensor:
 # class members 
 class TemperatureModule:
 	
-  def __init__(self):
+  def __init__(self, o_InputSysTime):
 		self.o_OutdoorTempSensor = TemperatureSensor(configs.i_OutdoorSensorPin)
 		self.o_IndoorTempSensor  = TemperatureSensor(configs.i_IndoorSensorPin)
-	
-  def DetermineSeason(self):
-	  o_TimeNow = datetime.datetime.now()
-	  if ( o_TimeNow.month < configs.i_StartSummerMonth or o_TimeNow.month > configs.i_EndSummerMonth):
-	    self.i_Season = configs.i_WintertimeFlag
-	  else:
-			self.i_Season = configs.i_SummertimeFlag
-			
-  def DetermineTime(self):
-    o_TimeNow = datetime.datetime.now()
-    # determine time of day
-    if(o_TimeNow.hour > configs.i_NighttimeHour or o_TimeNow.hour < configs.i_MorningHour):
-      self.i_TimeFlag = configs.i_NightFlag
-    else:
-      self.i_TimeFlag = configs.i_DaytimeFlag
+    self.o_SysTime = o_InputSysTime
   
   def ReadSensors(self):
     self.o_OutdoorTempSensor.read()
@@ -102,13 +88,13 @@ class TemperatureModule:
     if(f_OutdoorTemp < f_LocalHeatThreshold):
       
       # if its summer, don't do anything
-      if(self.i_Season == configs.i_SummertimeFlag):
+      if(self.o_SysTime.i_Season == configs.i_SummertimeFlag):
         return configs.i_DoNothingFlag, f_OutdoorTemp
       
       # otherwise, if it is winter
       else:
         # if its night, dial down the setting 2 degrees F
-        if (self.i_TimeFlag == configs.i_NightFlag):
+        if (self.o_SysTime.i_TimeFlag == configs.i_NightFlag):
           f_LocalTempSetting = configs.f_HeatSetting - configs.f_TemperatureSetback
         # if its day, heat at the normal temperature
         else:
@@ -120,7 +106,7 @@ class TemperatureModule:
     elif(f_OutdoorTemp > f_LocalHeatThreshold and f_OutdoorTemp < f_LocalCoolThreshold):
         
       # if low humidity or night, don't do anything
-      if(f_OutdoorHumidity < f_LocalHumThresh_Pct or self.i_TimeFlag == configs.i_NightFlag):
+      if(f_OutdoorHumidity < f_LocalHumThresh_Pct or self.o_SysTime.i_TimeFlag == configs.i_NightFlag):
         return configs.i_DoNothingFlag, f_OutdoorTemp
       
       # otherwise cool to clear out the humidity
@@ -132,7 +118,7 @@ class TemperatureModule:
       f_LocalTempSetting = configs.f_CoolSetting
     
       # if its night, increase the set temperature by 2
-      if(self.i_TimeFlag == configs.i_NightFlag):
+      if(self.o_SysTime.i_TimeFlag == configs.i_NightFlag):
         f_LocalTempSetting += configs.f_TemperatureSetback
         
       # if high humidity, decrease the set temperature by 2

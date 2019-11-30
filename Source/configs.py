@@ -17,10 +17,10 @@ __version__ = "0.4.1"
 
 # there should be no imports in this file!
 
-########################## Global Switches #############################
+############################## Global Switches #################################
 SW_USE_METRIC_UNITS = False
 
-############################ Error Codes ###############################
+################################ Error Codes ###################################
 SYSERROR_NO_ERROR                    = 0
 SYSERROR_TEMP_OUTDOOR_SENSOR_FAILURE = 1
 SYSERROR_TEMP_INDOOR_SENSOR_FAILRUE  = 2
@@ -28,14 +28,14 @@ SYSERROR_WL_MOISTURE_SENSOR_FAILURE  = 3
 SYSERROR_WL_API_CALL_FAILURE         = 4
 SYSERROR_GUI_GENERAL_FAILURE         = 5
 
-########################### API information ############################
+############################### API information ################################
 
 s_ApiBase            = "https://api.darksky.net/forecast/"     # root API 
-s_ApiKey             = "" # modify this with your own darksky key
-s_GPSLocation_LatLon = "" # modify this with your own GPS coordinates, e.g. "37.5148,15.7891"
+s_ApiKey             = "dea7ee9f3820aa9e6f8c6f1528ebb0aa" # modify this with your own darksky key
+s_GPSLocation_LatLon = "42.344137,-83.309652" # modify this with your own GPS coordinates, e.g. "37.5148,15.7891"
 s_FullAPI = s_ApiBase + s_ApiKey +  "/" + s_GPSLocation_LatLon # full API path
 
-##################### Temperature sensor information ###################
+######################### Temperature sensor information #######################
 
 i_IndoorSensorPin  = 17   # modify this with your own sensor signal pin for the outside
 i_OutdoorSensorPin = 26   # modify this with your own sensor signal pin for indoors
@@ -67,17 +67,21 @@ if SW_USE_METRIC_UNITS:
     
 f_HumThreshold_Pct = 50
 
-####################### Moisture Sensor Configs ########################
+########################### Moisture Sensor Configs ############################
 
 # note: to enable SPI for you:
 # 1. run sudo raspi-config
 # 2. go to interfacing options
 # 3. go to SPI, press enter to enable
-# 4. check to see if /dev/spidev0.0 exists 
+# 4. check to see if /dev/spidev0.0 exists, this is the SPI device shown below
 i_SPIDevice = 0
 i_SPIPort   = 0
 
-########################## Timing Configs ##############################
+i_AdcChannel = 2 # read channel 2 of the ADC
+
+i_WaterSensorScalar = 1024 # ADC outputs (0,1024), will scale to a percentage
+
+############################## Timing Configs ##################################
 # note: all times considered to be in military time
 i_NighttimeHour = 21  # when does night start?
 i_MorningHour   = 9   # when does the day start?
@@ -90,4 +94,4 @@ i_NightFlag   = 1  # the current state of the system is night
 
 i_StartSummerMonth = 4  # summer starts in May
 i_EndSummerMonth   = 10 # summer ends in October
-################################## end file ###################################
+################################## end file ####################################

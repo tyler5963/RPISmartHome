@@ -17,6 +17,7 @@ import configs
 import temperature
 import gui
 import water_lawn
+import systime 
 
 def main():
   o_TemperatureModule = temperature.TemperatureModule()
