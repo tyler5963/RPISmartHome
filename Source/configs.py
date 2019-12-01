@@ -81,6 +81,60 @@ i_AdcChannel = 2 # read channel 2 of the ADC
 
 i_WaterSensorScalar = 1024 # ADC outputs (0,1024), will scale to a percentage
 
+i_SprinklerOff = 0
+i_SprinklerOn = 1
+
+#1:Sand, 2:Loamy Sand, 3:Sandy Loam, 4:Loam, 5:Silt Loam, 6:Silty Clay Loam, 7:Clay Loam
+#8:Sandy Clay Loam, 9:Sandy Clay, 10:Silty Clay, 11:Clay
+i_SandType = 4
+
+#Sand
+if i_SandType = 1:
+  f_Wilt = 5.5
+  f_Capacity = 10
+#Loamy Sand
+elif i_SandType = 2:
+  f_Wilt = 9.25
+  f_Capacity = 16
+#Sandy Loam
+elif i_SandType = 3:
+  f_Wilt = 12
+  f_Capacity = 21
+#Loam
+elif i_SandType = 4:
+  f_Wilt = 15.75
+  f_Capacity = 27
+#Silt Loam
+elif i_SandType = 5:
+  f_Wilt = 18.75
+  f_Capacity = 30
+#Silty Clay Loam
+elif i_SandType = 6:
+  f_Wilt = 24
+  f_Capacity = 36
+#Clay Loam
+elif i_SandType = 7:
+  f_Wilt = 21.5
+  f_Capacity = 32
+#Sandy Clay Loam
+elif i_SandType = 8:
+  f_Wilt = 20.75
+  f_Capacity = 29
+#Sandy Clay
+elif i_SandType = 9:
+  f_Wilt = 18.25
+  f_Capacity = 28
+#Silty Clay
+elif i_SandType = 10:
+  f_Wilt = 25
+  f_Capacity = 40
+#Clay
+elif i_SandType = 11:
+  f_Wilt = 26.5
+  f_Capacity = 40
+  
+
+
 ############################## Timing Configs ##################################
 # note: all times considered to be in military time
 i_NighttimeHour = 21  # when does night start?
