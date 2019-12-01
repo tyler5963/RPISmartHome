@@ -70,7 +70,16 @@ class Forecast:
     self.l_HourlyForecasts = self.d_ForecastInformation["hourly"]["data"]
     
   def CheckForRain(self):
-    self.i_Rain = 1
+    self.i_ExpectRain = 0
+    #loops through entries form 5am to 5pm
+    for i in range(configs.i_StartRain, configs.i_EndRain):
+      self.d_HourlyForecasts = self.l_HourlyForecasts[i]
+      self.f_Precipitation = self.d_HourlyForecasts["precipProbability"]
+      print self.d_HourlyForecasts
+      print self.f_Precipitation
+      if self.f_Precipitation > configs.f_ExpectRainPercent:
+        self.i_ExpectRain = 1
+        break 
   
     
 class WaterSensor:
@@ -97,18 +106,22 @@ class WaterModule:
     self.o_OutdoorTempSensor.read()
     
   def MakeWateringDecision():
-    #get refreshed values
+    #get refreshed values from API
     self.o_Forecast.update()
     
-    #check temperature and 
-    if self.o_OutdoorTempSensor.f_Temperature_F < 40 or self.o_WaterSensor.i_Rain = 1:
+    #check temperature and rain expectation
+    if self.o_OutdoorTempSensor.f_Temperature_F < 40 or self.o_Forecast.i_ExpectRain = 1:
       self.i_WaterFlag = 0
-    elif self.i_WaterFlag = 1 and datetime.datetime.now() >= self.o_LastWaterTime:
+    #check if water is running and current time is 15 minutes past last check
+    elif self.i_WaterFlag = 1 and datetime.datetime.now() >= self.o_LastWaterTime + 15:
+      #check if the ground water level percent is greater than the soil capacity percent
       if self.o_WaterSensor.f_WaterLevel_Pct > self.f_SoilMoistureCapacity:
         self.i_WaterFlag = 0
       else:
         self.o_LastWaterTime = datetime.datetime.now()
+    #check if the water is not running
     elif self.i_WaterFlag = 0:
+      #check if the ground water level percent is below wilt warning value
       if self.o_WaterSensor.f_WaterLevel_Pct < self.f_SoilMoistureWilt:
         self.i_WaterFlag = 1
         self.o_LastWaterTime = datetime.datetime.now()                                          
@@ -116,7 +129,9 @@ class WaterModule:
   def main(self):
     while True:
       self.ReadSensors()
-      self.MakeWateringDecision()                                          
+      self.MakeWateringDecision()  
+      print(self.i_WaterFlag)
+      time.sleep(5)
       
 
 
