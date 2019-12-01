@@ -81,8 +81,16 @@ i_AdcChannel = 2 # read channel 2 of the ADC
 
 i_WaterSensorScalar = 1024 # ADC outputs (0,1024), will scale to a percentage
 
+#turn sprinkler on and off
 i_SprinklerOff = 0
 i_SprinklerOn = 1
+
+#time to start and end rain check
+i_StartRain = 6   #based on time before sun rises 5AM
+i_EndRain = 17    #based on usual peak hotness of day 5PM
+
+#percentage of precipitation that counts as going to rain
+f_ExpectRainPercent = 0.65
 
 #1:Sand, 2:Loamy Sand, 3:Sandy Loam, 4:Loam, 5:Silt Loam, 6:Silty Clay Loam, 7:Clay Loam
 #8:Sandy Clay Loam, 9:Sandy Clay, 10:Silty Clay, 11:Clay
